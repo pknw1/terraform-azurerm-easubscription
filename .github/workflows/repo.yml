@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: 'main'
           token: "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"
       - run: 'echo "payload: ${{ toJson(github.event.client_payload).data }}"'
       - run: 'PAYLOAD=$(echo ${{github.event.client_payload.data}} | base64 -d)'
