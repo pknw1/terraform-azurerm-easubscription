@@ -10,3 +10,5 @@ jobs:
       - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
       - run: echo baz
         if: github.event.action == 'baz'
+      - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}" > newfile.txt'
+      - run: 'cat newfile.txt'
