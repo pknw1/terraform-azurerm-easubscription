@@ -1,4 +1,5 @@
-
+# If the Apply Budget option is set to true, the default budget and alerting 
+# are added to the new subscription
 
 resource "azurerm_consumption_budget_subscription" "admin" {
   count = local.create_budgeet == true ? 1 : 0

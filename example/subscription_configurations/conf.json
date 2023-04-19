@@ -1,0 +1,20 @@
+{
+    "billing_account" : "87561154",
+    "enrollment_account" : "311200",
+
+    "owner" : "paul.kelleher",
+    "email" : "paul.kelleher@contino.io", 
+    "purpose" : "subscription_purpose",
+    "alias" : "subscription_alias",
+
+    "apply_budget" : true,
+    "management_group" : "UK",
+    
+    "create_automation_repo" : true,
+    "github_username": "pknw1",
+    "template_repo_org" : "pknw1",
+    "template_repo" : "terraform-boilerplate",
+    "create_service_principal" : true,
+    "service_principal_display_name" : "subscription_name_subscription"
+
+    }

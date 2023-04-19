@@ -1,14 +1,16 @@
-name: example-client-payload-action
-on: repository_dispatch
+
+name: remote_trigger_POST
+on: 
+  repository_dispatch:
+    types: [subscription-request]
 jobs:
-  test:
-    name: Test
+  easub:
+    name: EA Subscription
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: 'echo "field: ${{ github.event.client_payload.foo }}"'
+      - uses: actions/checkout@v2
       - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}"'
-      - run: echo baz
-        if: github.event.action == 'baz'
-      - run: 'echo "payload: ${{ toJson(github.event.client_payload) }}" > newfile.txt'
-      - run: 'cat newfile.txt'
+      - run: 'echo "${{ toJson(github.event.client_payload) }}" > $(date +%s).json'
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "updated_config"

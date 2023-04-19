@@ -13,11 +13,10 @@ locals {
     associate_management_group = true
     management_group_name = var.management_group != "" ? var.management_group : "UK"
 
-    create_service_principal          = true
+    create_service_principal          = var.create_service_principal
     service_principal_display_name    = var.service_principal_display_name != "" ? var.service_principal_display_name : data.azurerm_subscription.current.id    
-
-    owners_merged                   = concat( [local.owner], [local.owner_assignments])
  
+    create_automation_repo = false
     create_budgeet = var.apply_budget 
     create_shared_remote_backend = true
 
@@ -41,9 +40,5 @@ locals {
     }
 
     repository_name="${join("_", ["${local.alias}", "automation_repositoty"])}"
-
-    owner_assignments = var.owner_assignments == [] ? "no additional users" : jsonencode(var.owner_assignments)
-    contributor_assignments = var.contributor_assignments == [] ? "no additional users" : jsonencode(var.contributor_assignments)
-    reader_assignments = var.reader_assignments == [] ? "no additional users" : jsonencode(var.reader_assignments)
 
 }
