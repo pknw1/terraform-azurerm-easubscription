@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: 'echo "payload: ${{ toJson(github.event.client_payload).data }}"'
-      - run: 'PAYLOAD=$($(echo ${{github.event.client_payload.data}} | base64 -d))'
+      - run: 'PAYLOAD=$(echo ${{github.event.client_payload.data}} | base64 -d)'
       - run: 'echo "${{ toJson(github.event.client_payload) }}" > $(date +%s).json'
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
