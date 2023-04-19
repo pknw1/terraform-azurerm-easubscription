@@ -1,0 +1,41 @@
+name: Deploy Quik
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+
+env: 
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  TF_VAR_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+  TF_VAR_org_gh_token: ${{ secrets.ORG_GH_TOKEN }}
+      
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  safe_apply:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16        
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+          
+      - name: Terraform Init
+        id: init
+        run: |
+          cd example
+          terraform init -no-color -input=false
+      - name: Terraform Apply
+        id: apply
+        run: |
+          cd example
+          terraform plan -no-color -input=false #terraform apply -no-color -input=false -auto-approve 
+        continue-on-error: false
