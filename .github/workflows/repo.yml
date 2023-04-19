@@ -17,4 +17,4 @@ jobs:
       - run: 'echo "${{ toJson(github.event.client_payload) }}" > $(date +%s).json'
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "updated_config"
+          commit_message: "updated_configs"
